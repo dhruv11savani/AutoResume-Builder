@@ -16,13 +16,13 @@ pipeline {
 
         stage('Run LaTeX Builder') {
             steps {
-                sh 'docker run --rm -v $PWD:/app resume-builder'
+                sh 'docker run --rm -v $PWD:/app resume-builder pdflatex resume.tex'
             }
         }
 
         stage('Archive PDF') {
             steps {
-                archiveArtifacts artifacts: '*.pdf', fingerprint: true
+                archiveArtifacts artifacts: '**/*.pdf', allowEmptyArchive: false
             }
         }
     }
